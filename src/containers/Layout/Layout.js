@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Container } from "react-bootstrap";
 import Navbar from "../../components/Navbar/Navbar";
 
+import { connect } from "react-redux";
 const Layout = props => {
-	const [ cartItemCount, setCartItemCount ] = useState(0);
 	return (
 		<div>
-			<Navbar items={cartItemCount} />
+			<Navbar cartItemsCount={props.cartItemsCount} />
 			{/* Categories */}
-			<Container>{props.children}</Container>
+			<Container className="pt-4">{props.children}</Container>
 		</div>
 	);
 };
 
-export default Layout;
+const mapStateToProps = state => {
+	return {
+		cartItemsCount: state.cart.cartItemsCount
+	};
+};
+
+export default connect(mapStateToProps)(Layout);

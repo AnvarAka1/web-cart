@@ -1,16 +1,23 @@
 import React from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
-const navbar = ({ items }) => {
+import { NavLink } from "react-router-dom";
+const navbar = ({ cartItemsCount }) => {
 	return (
 		<React.Fragment>
 			<Navbar bg="dark" variant="dark">
 				<Navbar.Brand href="#home">Магазин</Navbar.Brand>
 				<Nav className="mr-auto">
-					<Nav.Link href="#home">Продукты</Nav.Link>
-					<Nav.Link href="#features">Продано</Nav.Link>
+					<Nav.Item className="mr-2">
+						<NavLink to="/">Продукты</NavLink>
+					</Nav.Item>
+					<Nav.Item>
+						<NavLink to="/sold">Продано</NavLink>
+					</Nav.Item>
 				</Nav>
 				<Nav>
-					<Nav.Link href="#pricing">Корзина ({items})</Nav.Link>
+					<Nav.Item className="mr-2">
+						<NavLink to="/cart">Корзина ({cartItemsCount})</NavLink>
+					</Nav.Item>
 				</Nav>
 				<Form inline>
 					<FormControl type="text" placeholder="Search" className="mr-sm-2" />

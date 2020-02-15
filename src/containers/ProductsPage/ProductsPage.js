@@ -4,6 +4,8 @@ import { Row, Col } from "react-bootstrap";
 import Products from "../../components/Products/Products";
 import ProductImage from "../../assets/images/1.jpg";
 
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 const ProductsPage = props => {
 	const [ products, setProducts ] = useState([
 		{
@@ -11,6 +13,7 @@ const ProductsPage = props => {
 			title: "Product0",
 			src: ProductImage,
 			description: "Description0",
+			price: 10,
 			maxAmount: 7
 		},
 		{
@@ -18,6 +21,7 @@ const ProductsPage = props => {
 			title: "Product1",
 			src: ProductImage,
 			description: "Description1",
+			price: 5,
 			maxAmount: 5
 		},
 		{
@@ -25,6 +29,7 @@ const ProductsPage = props => {
 			title: "Product2",
 			src: ProductImage,
 			description: "Description2",
+			price: 15,
 			maxAmount: 7
 		},
 		{
@@ -32,6 +37,7 @@ const ProductsPage = props => {
 			title: "Product3",
 			src: ProductImage,
 			description: "Description3",
+			price: 2,
 			maxAmount: 5
 		}
 	]);
@@ -52,6 +58,7 @@ const ProductsPage = props => {
 	// add to redux
 	const addToCartHandler = (event, id) => {
 		event.preventDefault();
+		props.onIncCartItems();
 		console.log(id);
 	};
 	const plusProductHandler = (event, id) => {
@@ -108,6 +115,7 @@ const ProductsPage = props => {
 			<Row>
 				{!isLoading && (
 					<Products
+						hasAmountController
 						products={products}
 						addToCartClicked={addToCartHandler}
 						plusClicked={plusProductHandler}
@@ -120,4 +128,9 @@ const ProductsPage = props => {
 	);
 };
 
-export default ProductsPage;
+const mapDispatchToProps = dispatch => {
+	return {
+		onIncCartItems: () => dispatch(actions.incCartItemsCount())
+	};
+};
+export default connect(null, mapDispatchToProps)(ProductsPage);

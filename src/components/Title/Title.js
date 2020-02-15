@@ -1,10 +1,12 @@
 import React from "react";
-import { Row } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Header from "../UI/Header/Header";
 const title = ({ children }) => {
 	return (
-		<Row className="mt-4 mb-4">
-			<Header h={3}>{children}</Header>
+		<Row className="mb-4">
+			<Col>
+				<Header h={3}>{children}</Header>
+			</Col>
 		</Row>
 	);
 };
